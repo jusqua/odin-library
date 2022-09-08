@@ -1,0 +1,179 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;700&display=swap');
+:root {
+  font-family: 'Ubuntu', 'Helvetica', sans-serif;
+	--text: #4c4f69;
+	--surface2: #acb0be;
+	--surface1: #bcc0cc;
+	--surface0: #ccd0da;
+	--base: #eff1f5;
+  --primary: #40a02b;
+}
+
+.dark { 
+	--text: #c6d0f5;
+	--surface2: #565970;
+	--surface1: #43465a;
+	--surface0: #313244;
+	--base: #1e1e2e;
+  --primary: #a6e3a1;
+}
+
+* {
+  color: var(--text);
+  transition: .3s background-color ease-in-out, .3s color ease-in-out;
+}
+
+body {
+  margin: 0;
+  height: 100vh;
+  background-color: var(--base);
+}
+
+a {
+  text-decoration: none;
+}
+
+footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  text-align: center;
+  background-color: var(--surface0);
+}
+
+footer a {
+  color: var(--primary);
+  margin: 0 .2rem;
+  position: relative;
+  text-decoration: none;
+}
+
+footer a::after {
+  content: '';
+  position: absolute;
+  bottom: -.1rem;
+  left: 0;
+  border-bottom: 1px solid var(--primary);
+  width: 100%;
+  transition: .2s width;
+  pointer-events: none;
+}
+
+footer a:hover::after,
+footer a:focus::after {
+  width: 0;
+}
+
+.container {
+  display: grid;
+  grid-template-rows: 5rem auto 2rem;
+  height: 100%;
+}
+
+.topbar {
+  background-color: var(--surface0);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.topbar h1 {
+  font-size: 2rem;
+}
+
+.logo {
+  display: grid;
+  grid-template: repeat(12, 1fr) / repeat(12, 1fr);
+  width: 4rem;
+  height: 4rem;
+  gap: .1rem;
+}
+
+.logo > * {
+  background-color: var(--primary);
+  border-radius: 2px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-evenly;
+  height: 100%;
+}
+
+.logo .one {
+  grid-area: 1 / 1 / 13 / 3;
+}
+
+.logo .two {
+  grid-area: 2 / 3 / 13 / 5;
+}
+
+.logo .three {
+  grid-area: 3 / 5 / 13 / 6;
+}
+
+.logo .four {
+  grid-area: 4 / 6 / 13 / 9;
+}
+
+.logo .five {
+  grid-area: 1 / 9 / 13 / 10;
+}
+
+.logo .six {
+  grid-area: 3 / 10 / 13 / 11;
+}
+
+.logo .seven {
+  grid-area: 2 / 11 / 13 / 13;
+}
+
+.logo > * > * {
+  background-color: var(--surface0);
+}
+
+.logo .line {
+  width: 100%;
+  height: 2px;
+}
+
+.logo .block {
+  width: 50%;
+  height: 50%;
+}
+
+.content {
+  display: grid;
+  position: relative;
+}
+
+.content .add-book {
+  position: absolute;
+  background-color: var(--surface0);
+  bottom: 1rem;
+  right: 1rem;
+  font-size: 2rem;
+  padding: .5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+}
+
+.content .add-book:hover {
+  background-color: var(--primary);
+  color: var(--surface0);
+}
+
+.content .no-books {
+  font-size: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
