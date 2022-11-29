@@ -1,74 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="styles.css">
-  <script src="https://unpkg.com/phosphor-icons" defer></script>
-  <script src="script.js" defer></script>
-  <title>Library</title>
-</head>
-
-<body>
-  <div class="container">
-    <section class="topbar">
-      <div>
-        <i class="logo">
-          <i class="one">
-            <i class="line"></i>
-            <i class="block"></i>
-            <i class="line"></i>
-          </i>
-          <i class="two">
-            <i class="line"></i>
-            <i class="block"></i>
-            <i class="line"></i>
-          </i>
-          <i class="three">
-            <i class="line"></i>
-            <i class="block"></i>
-            <i class="line"></i>
-          </i>
-          <i class="four">
-            <i class="line"></i>
-            <i class="block"></i>
-            <i class="line"></i>
-          </i>
-          <i class="five">
-            <i class="line"></i>
-            <i class="block"></i>
-            <i class="line"></i>
-          </i>
-          <i class="six">
-            <i class="line"></i>
-            <i class="block"></i>
-            <i class="line"></i>
-          </i>
-          <i class="seven">
-            <i class="line"></i>
-            <i class="block"></i>
-            <i class="line"></i>
-          </i>
-        </i>
+  <head>
+    <title>Library</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://unpkg.com/phosphor-icons"></script>
+    <script src="./script.js" defer></script>
+    <link rel="stylesheet" href="./style.css">
+  </head>
+  <body>
+    <header class="flex center">
+      <div class="flex align-center justify-between content">
+        <a href="https://gitlab.com/potential-garbage/the-odin-project/library" id="logo" class="ph-books-fill button"><span>Library</span></a>
+        <a href="#" id="add-book" class="ph-plus-bold button"><span>Add book</span></a>
       </div>
-      <h1>The Library</h1>
-    </section>
-    <section class="content">
-      <div class="book-shelf">
+    </header>
+    <section class="flex justify-center">
+      <div id="book-shelf" class="content">
       </div>
-      <span class="ph-smiley-wink-fill no-books">No books in your shelf, try adding some!</span>
-      <a class="ph-plus add-book" href="#">Add book</a>
     </section>
     <footer>
-      This is a
+      This is a 
       <a href="https://gitlab.com/potential-garbage">Potential Garbage</a>
       made by
       <a href="https://www.gitlab.com/jusqua">jusqua</a>
       for
       <a href="https://www.theodinproject.com">The Odin Project</a>
     </footer>
-  </div>
-</body>
-
+  </body>
 </html>

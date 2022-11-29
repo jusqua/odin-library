@@ -1,0 +1,193 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap');
+
+:root {
+  font-family: 'Ubuntu', sans-serif;
+  --size: .5rem;
+  --bg-color: #F2F4F8;
+  --text-color: #434C5E;
+  --layer-color: #FFFFFF;
+  --hover-color: #E8EBF2;
+  --shadow-color: #B8C2D755;
+  --border-radius: 8px;
+}
+
+:root.dark {
+  --bg-color: #242933;
+  --text-color: #ECEFF4;
+  --layer-color: #2E3440;
+  --hover-color: #383F4E;
+  --shadow-color: #0F111555;
+}
+
+* {
+  color: var(--text-color);
+}
+
+*:focus {
+  outline: none;
+  background-color: var(--hover-color);
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  background-color: var(--bg-color);
+}
+
+header {
+  position: fixed;
+  top: 0;
+  height: 5rem;
+  width: 100%;
+  z-index: 3;
+  background-color: var(--bg-color);
+  transition: box-shadow ease-out .2s;
+}
+
+header.elevation {
+  box-shadow: 0 3px 6px 1px var(--shadow-color);
+}
+
+footer {
+  grid-area: 3 / 2 / span 1 / span 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: .5rem;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background-color: var(--bg-color);
+  transition: box-shadow ease-out .2s;
+}
+
+footer.elevation {
+  box-shadow: 0 -3px 6px 1px var(--shadow-color);
+}
+
+footer a {
+  color: var(--text-color);
+  margin: 0 .2rem;
+  position: relative;
+  text-decoration: none;
+}
+
+footer a::after {
+  content: '';
+  position: absolute;
+  bottom: -.1rem;
+  left: 0;
+  border-bottom: 1px solid var(--text-color);
+  width: 100%;
+  transition: .2s width;
+  pointer-events: none;
+}
+
+footer a:hover::after,
+footer a:focus::after {
+  width: 0;
+}
+
+#logo {
+  margin-right: .5rem;
+  font-size: 2rem;
+}
+
+#book-shelf {
+  margin-top: 7rem;
+  margin-bottom: 4rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
+  box-sizing: border-box;
+  gap: 1.5rem;
+}
+
+.elevation {
+  box-shadow: 0 0 6px 1px var(--shadow-color);
+  transition: box-shadow ease-in-out .2s;
+}
+
+.book {
+  background-color: var(--layer-color);
+  min-height: 20rem;
+  border-radius: var(--border-radius);
+}
+
+.book.elevation:hover {
+  box-shadow: 0 0 12px 2px var(--shadow-color);
+}
+
+.flex {
+  display: flex;
+}
+
+.center {
+  align-items: center;
+  justify-content: center;
+}
+
+.align-center {
+  align-content: center;
+  align-items: center;
+}
+
+.justify-center {
+  justify-content: center;
+  justify-items: center;
+}
+
+.justify-between {
+  justify-content: space-between;
+  justify-items: space-between;
+}
+
+.button {
+  height: calc(2rem + var(--size));
+  min-width: calc(2rem + var(--size));
+  font-size: calc(1rem + var(--size));
+  margin: calc(var(--size) / 2);
+  padding: var(--size);
+  box-sizing: border-box;
+  text-decoration: none;
+}
+
+.button {
+  height: calc(2rem + var(--size));
+  min-width: calc(2rem + var(--size));
+  font-size: calc(1rem + var(--size));
+  margin: calc(var(--size) / 2);
+  padding: var(--size);
+  box-sizing: border-box;
+  text-decoration: none;
+  transition: background-color .1s ease-in-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--border-radius);
+}
+
+.button:hover {
+  background-color: var(--hover-color);
+}
+
+.button span {
+  margin-left: .5rem;
+}
+
+.content {
+  width: 100%;
+  padding: 0 1rem;
+  box-sizing: border-box;
+}
+
+@media screen and (min-width: 75rem) {
+  .content {
+    width: 75rem;
+    padding: 0;
+  }
+}
+
+@media screen and (min-width: 75rem) {
+
+}
