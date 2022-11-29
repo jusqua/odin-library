@@ -165,9 +165,16 @@ footer a:focus::after {
   align-items: center;
   justify-content: center;
   border-radius: var(--border-radius);
+  background-color: var(--bg-color);
+  border: none;
 }
 
 .button:hover {
+  background-color: var(--hover-color);
+  cursor: pointer;
+}
+
+.button:focus {
   background-color: var(--hover-color);
 }
 
@@ -186,8 +193,4 @@ footer a:focus::after {
     width: 75rem;
     padding: 0;
   }
-}
-
-@media screen and (min-width: 75rem) {
-
 }
