@@ -5,6 +5,7 @@
   --size: .5rem;
   --bg-color: #ECEFF4;
   --text-color: #2E3440;
+  --text-dim-color: #4C566A;
   --layer-color: #D8DEE9;
   --hover-color: #E5E9F0;
   --shadow-color: #DDE3EC;
@@ -14,6 +15,7 @@
 :root.dark {
   --bg-color: #2E3440;
   --text-color: #ECEFF4;
+  --text-dim-color: #D8DEE9;
   --layer-color: #3B4252;
   --hover-color: #434C5E;
   --shadow-color: #272B33;
@@ -147,13 +149,61 @@ footer i::before {
 }
 
 .book {
+  height: 12rem;
+  padding: 1rem;
+  padding-right: 4rem;
+  box-sizing: border-box;
   background-color: var(--layer-color);
-  min-height: 20rem;
   border-radius: var(--border-radius);
+  transition: box-shadow ease-in-out .2s;
+  box-shadow: 0 0 12px 1px var(--shadow-color);
+  display: flex;
+  flex-direction: column;
+  position: relative;
 }
 
-.book.elevation:hover {
-  box-shadow: 0 0 12px 2px var(--shadow-color);
+.book .actions {
+  display: flex;
+  flex-direction: column;
+}
+
+.book p {
+  margin: .5rem 0;
+  word-break: break-all;
+  user-select: none;
+}
+
+.book .read-status {
+  position: absolute;
+  bottom: .5rem;
+  left: .5rem;
+  margin: 0;
+}
+
+.book:hover {
+  box-shadow: 0 0 36px 2px var(--shadow-color);
+}
+
+.book .show-on-hover {
+  transition: opacity ease-in-out .2s;
+  opacity: 0;
+}
+
+.book:hover .show-on-hover {
+  opacity: 1;
+}
+
+.book .title {
+  font-size: 1.5rem;
+}
+
+.book .author {
+  font-size: 1.2rem;
+  color: var(--text-dim-color);
+}
+
+.small {
+  --size: .25rem;
 }
 
 .flex {
@@ -168,6 +218,11 @@ footer i::before {
 .align-center {
   align-content: center;
   align-items: center;
+}
+
+.justify-end {
+  justify-content: flex-end;
+  justify-items: flex-end;
 }
 
 .justify-center {
@@ -207,6 +262,11 @@ footer i::before {
   border: none;
 }
 
+.button.action {
+  background-color: var(--layer-color);
+  font-size: calc(1rem + var(--size));
+}
+
 .button:hover {
   background-color: var(--hover-color);
   cursor: pointer;
@@ -224,6 +284,12 @@ footer i::before {
   width: 100%;
   padding: 0 1rem;
   box-sizing: border-box;
+}
+
+.close.button {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
 }
 
 @media screen and (min-width: 75rem) {

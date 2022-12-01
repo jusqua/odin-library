@@ -1,3 +1,39 @@
+class Book {
+  constructor(name, author, pages, pagesRead) {
+    this.name = name;
+    this.author = author;
+    this.pages = pages;
+    this.pagesRead = pagesRead;
+  }
+
+  get isRead() {
+    return this.pages === this.pagesRead;
+  }
+}
+
+class Library {
+  constructor() {
+    this.books = [];
+  }
+
+  add(book) {
+    this.books.push(book);
+  }
+
+  remove(index) {
+    this.books.splice(index, 1);
+  }
+
+  find(name) {
+    name = name.toLowerCase();
+    return this.books.findIndex(book => book.name.toLowerCase() === name);
+  }
+
+  get size() {
+    return this.books.size;
+  }
+}
+
 window.addEventListener('DOMContentLoaded', () => {
   const bookShelf = document.getElementById('book-shelf');
   const addBookButton = document.getElementById('add-book');
@@ -29,7 +65,18 @@ window.addEventListener('DOMContentLoaded', () => {
   (new ResizeObserver(handleHeaderFooterBehavior)).observe(document.body);
 
   addBookButton.addEventListener('click', () => {
-    bookShelf.innerHTML += '<div class="book elevation"></div>';
+    const book = document.createElement('div');
+    book.classList.add('book');
+    book.innerHTML = `
+      <button class="ph-x-bold close button action show-on-hover"></button>
+      <p class="title">Title</p>
+      <p class="author">Author</p>
+      <div class="flex align-center read-status">
+        <button class="ph-book-fill small button action"></button>
+        <span>Pages left</span>
+      </div>
+    `;
+    bookShelf.appendChild(book);
   });
 });
 
