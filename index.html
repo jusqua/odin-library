@@ -5,13 +5,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="https://unpkg.com/phosphor-icons"></script>
-    <script src="./script.js" defer></script>
+    <script src="./script.js"></script>
     <link rel="stylesheet" href="./style.css">
   </head>
-  <body>
+  <body class="preload">
     <header class="flex center">
       <div class="flex align-center justify-between content">
-        <a href="https://gitlab.com/potential-garbage/the-odin-project/library" id="logo" class="ph-books-fill button"><span>Library</span></a>
+        <div class="flex center">
+          <a href="https://gitlab.com/potential-garbage/the-odin-project/library" id="logo" class="ph-books-fill button"></a>
+          <span id="logo-name">Library</span>
+        </div>
         <button id="add-book" class="ph-plus-bold button"><span>Add book</span></button>
       </div>
     </header>
@@ -20,12 +23,13 @@
       </div>
     </main>
     <footer>
-      This is a 
+      <span>This is a</span>
       <a href="https://gitlab.com/potential-garbage">Potential Garbage</a>
-      made by
-      <a href="https://www.gitlab.com/jusqua">jusqua</a>
-      for
+      <span>for</span>
+      <i class="ph-plus-bold"></i>
       <a href="https://www.theodinproject.com">The Odin Project</a>
+      <i class="ph-equals-bold"></i>
+      <i class="ph-heart-straight-fill" style="margin-left: .2rem"></i>
     </footer>
   </body>
 </html>
