@@ -10,9 +10,12 @@ window.addEventListener('DOMContentLoaded', () => {
     } else if (window.scrollY === 0) {
       header.classList.remove('elevation');
     }
-    if (window.scrollY !== document.body.scrollHeight - window.innerHeight && !footer.classList.contains('elevation')) {
+
+    const minScrollY = window.scrollY + 16;
+    const currentScrollPosition = document.body.scrollHeight - window.innerHeight;
+    if (minScrollY < currentScrollPosition && !footer.classList.contains('elevation')) {
       footer.classList.add('hide');
-    } else if (window.scrollY === document.body.scrollHeight - window.innerHeight) {
+    } else if (minScrollY >= currentScrollPosition) {
       footer.classList.remove('hide');
     }
   }
