@@ -4,31 +4,40 @@
     <title>Library</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@unocss/reset/tailwind.min.css">
+    <link rel="stylesheet" href="./style.css">
+    <script src="https://cdn.jsdelivr.net/npm/@unocss/runtime"></script>
     <script src="https://unpkg.com/phosphor-icons"></script>
     <script src="./script.js"></script>
-    <link rel="stylesheet" href="./style.css">
   </head>
-  <body class="preload">
-    <header class="flex center">
-      <div class="flex align-center justify-between content">
-        <div class="flex center">
-          <a href="https://gitlab.com/potential-garbage/the-odin-project/library" id="logo" class="ph-books-fill button"></a>
-          <span id="logo-name">Library</span>
-        </div>
-        <button id="add-book" class="ph-plus-bold button"><span>Add book</span></button>
-      </div>
+  <body class="flex flex-col min-h-screen w-screen text-zinc-900 bg-zinc-200 dark:text-zinc-200 dark:bg-zinc-900" un-cloak>
+    <header class="h-16 flex items-center justify-around sticky top-0 bg-inherit">
+      <h1 class="ph-books-fill before:mr-2 flex items-center justify-center text-4xl">
+        Library
+      </h1>
+      <button
+        id="add-book"
+        type="button"
+        class="ph-plus-bold text-xl p-2 flex items-center justify-center rounded-xl transition-colors hover:bg-zinc-300 hover:dark:bg-zinc-800"
+      >
+        <span class="hidden ml-2 sm:block">Add Book</span>
+      </button>
     </header>
-    <main class="flex justify-center">
-      <div id="book-shelf" class="content"></div>
+    <main class="flex grow items-center justify-center">
+      <h2 class="text-6xl">🚧 TODO</h2>
     </main>
-    <footer>
-      <span>This is a</span>
-      <a href="https://gitlab.com/potential-garbage">Potential Garbage</a>
-      <span>for</span>
-      <i class="ph-plus-bold"></i>
-      <a href="https://www.theodinproject.com">The Odin Project</a>
-      <i class="ph-equals-bold"></i>
-      <i class="ph-heart-straight-fill" style="margin-left: .2rem"></i>
+    <footer class="sticky bottom-0 h-12 flex items-center justify-center bg-inherit text-inherit">
+      <a href="https://gitlab.com/potential-garbage" class="relative group">
+      <span class="absolute -bottom-px left-0 w-full sm:w-0 border-b transition-all group-hover:w-full border-zinc-900 dark:border-zinc-200"></span>
+        Potential Garbage
+      </a>
+      <i class="ph-plus-bold mx-2"></i>
+      <a href="https://www.theodinproject.com" class="relative group">
+        <span class="absolute -bottom-px left-0 w-full sm:w-0 border-b transition-all group-hover:w-full border-zinc-900 dark:border-zinc-200"></span>
+        The Odin Project
+      </a>
+      <i class="ph-equals-bold ml-2"></i>
+      <i class="ph-heart-straight-fill ml-2 text-red-600"></i>
     </footer>
   </body>
 </html>
