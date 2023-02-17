@@ -7,9 +7,19 @@ function main() {
     bookshelf.appendChild(book);
   }
 
+  (new ResizeObserver(handleScroll)).observe(document.body);
+  window.addEventListener('scroll', handleScroll);
+  window.addEventListener('resize', handleScroll);
   document.getElementById('change-theme').addEventListener('click', toogleTheme);
   if (window.matchMedia('(prefers-color-scheme: dark)').matches)
     toogleTheme();
+}
+
+function handleScroll() {
+  document.querySelector('header')
+    .classList[window.scrollY ? 'add' : 'remove']('drop-shadow');
+  document.querySelector('footer')
+    .classList[window.scrollY !== document.body.scrollHeight - window.innerHeight ? 'add' : 'remove']('drop-shadow');
 }
 
 function toogleTheme() {
