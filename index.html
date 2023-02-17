@@ -10,23 +10,18 @@
     <script src="https://unpkg.com/phosphor-icons"></script>
     <script src="./script.js"></script>
   </head>
-  <body class="flex flex-col min-h-screen w-screen text-zinc-900 bg-zinc-200 dark:text-zinc-200 dark:bg-zinc-900" un-cloak>
-    <header class="h-16 flex items-center justify-around sticky top-0 bg-inherit">
+  <body class="flex flex-col min-h-screen w-screen text-zinc-800 bg-zinc-300 dark:text-zinc-300 dark:bg-zinc-800" un-cloak>
+    <header class="h-16 flex items-center justify-around sticky top-0 bg-inherit z-2">
       <h1 class="ph-books-fill before:mr-2 flex items-center justify-center text-4xl">
         Library
       </h1>
-      <button
-        id="add-book"
-        type="button"
-        class="ph-plus-bold text-xl p-2 flex items-center justify-center rounded-xl transition-colors hover:bg-zinc-300 hover:dark:bg-zinc-800"
-      >
+      <button id="add-book" type="button" class="ph-plus-bold text-xl p-2 flex items-center justify-center rounded-xl transition-colors hover:bg-zinc-400 hover:dark:bg-zinc-700">
         <span class="hidden ml-2 sm:block">Add Book</span>
       </button>
     </header>
-    <main class="flex grow items-center justify-center">
-      <h2 class="text-6xl">🚧 TODO</h2>
+    <main id="bookshelf" class="grid grid-cols-[repeat(auto-fill,minmax(20rem,1fr))] auto-rows-min p-8 gap-4 grow">
     </main>
-    <footer class="sticky bottom-0 h-12 flex items-center justify-center bg-inherit text-inherit">
+    <footer class="sticky bottom-0 h-12 flex items-center justify-center bg-inherit text-inherit z-2">
       <a href="https://gitlab.com/potential-garbage" class="relative group">
       <span class="absolute -bottom-px left-0 w-full sm:w-0 border-b transition-all group-hover:w-full border-zinc-900 dark:border-zinc-200"></span>
         Potential Garbage
