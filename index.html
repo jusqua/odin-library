@@ -15,12 +15,14 @@
       <h1 class="ph-books-fill before:mr-2 flex items-center justify-center text-4xl">
         Library
       </h1>
-      <button id="add-book" type="button" class="ph-plus-bold text-xl p-2 flex items-center justify-center rounded-xl transition-colors hover:bg-zinc-400 hover:dark:bg-zinc-700">
-        <span class="hidden ml-2 sm:block">Add Book</span>
-      </button>
+      <div class="flex flex-row gap-2 items-center justify-center">
+        <button id="change-theme" type="button" class="ph-sun-bold text-xl p-2 flex items-center justify-center rounded-xl transition-colors hover:bg-zinc-400 hover:dark:bg-zinc-700"></button>
+        <button id="add-book" type="button" class="ph-plus-bold text-xl p-2 flex items-center justify-center rounded-xl transition-colors hover:bg-zinc-400 hover:dark:bg-zinc-700">
+          <span class="hidden ml-2 sm:block">Add Book</span>
+        </button>
+      </div>
     </header>
-    <main id="bookshelf" class="grid grid-cols-[repeat(auto-fill,minmax(20rem,1fr))] auto-rows-min p-8 gap-4 grow">
-    </main>
+    <main id="bookshelf" class="grid grid-cols-[repeat(auto-fill,minmax(20rem,1fr))] auto-rows-min p-8 gap-4 grow"></main>
     <footer class="sticky bottom-0 h-12 flex items-center justify-center bg-inherit text-inherit z-2">
       <a href="https://gitlab.com/potential-garbage" class="relative group">
       <span class="absolute -bottom-px left-0 w-full sm:w-0 border-b transition-all group-hover:w-full border-zinc-900 dark:border-zinc-200"></span>
