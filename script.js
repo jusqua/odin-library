@@ -1,5 +1,6 @@
 function main() {
   const bookshelf = document.getElementById('bookshelf');
+  const books = [];
 
   for (let i = 0; i < 9; i++) {
     const book = document.createElement('button');
@@ -11,8 +12,22 @@ function main() {
   window.addEventListener('scroll', handleScroll);
   window.addEventListener('resize', handleScroll);
   document.getElementById('change-theme').addEventListener('click', toogleTheme);
+  document.getElementById('add-book').addEventListener('click', handleModal);
+  document.getElementById('add-book-modal-close').addEventListener('click', handleModal);
+  document.getElementById('add-book-modal-overlay').addEventListener('click', handleModal);
+  document.getElementById('add-book-modal-submit').addEventListener('click', handleSubmit);
   if (window.matchMedia('(prefers-color-scheme: dark)').matches)
     toogleTheme();
+}
+
+function handleModal() {
+  document.getElementById('add-book-modal').classList.toggle('invisible');
+  document.body.classList.toggle('overflow-hidden');
+}
+
+function handleSubmit(e) {
+  handleModal();
+  e.preventDefault();
 }
 
 function handleScroll() {
