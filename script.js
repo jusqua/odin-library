@@ -12,10 +12,13 @@ function main() {
   window.addEventListener('scroll', handleScroll);
   window.addEventListener('resize', handleScroll);
   document.getElementById('change-theme').addEventListener('click', toogleTheme);
+
   document.getElementById('add-book').addEventListener('click', handleModal);
   document.getElementById('add-book-modal-close').addEventListener('click', handleModal);
   document.getElementById('add-book-modal-overlay').addEventListener('click', handleModal);
+
   document.getElementById('add-book-modal-submit').addEventListener('click', handleSubmit);
+
   if (window.matchMedia('(prefers-color-scheme: dark)').matches)
     toogleTheme();
 }
@@ -23,6 +26,10 @@ function main() {
 function handleModal() {
   document.getElementById('add-book-modal').classList.toggle('invisible');
   document.body.classList.toggle('overflow-hidden');
+  document.getElementById('title-input').value = "";
+  document.getElementById('author-input').value = "";
+  document.getElementById('pages-input').value = "";
+  document.getElementById('pages-read-input').value = "";
 }
 
 function handleSubmit(e) {
