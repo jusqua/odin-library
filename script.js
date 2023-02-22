@@ -20,10 +20,12 @@ function main() {
   document.getElementById('add-book-modal-submit').addEventListener('click', handleSubmit);
 
   document.getElementById('title-input').addEventListener('blur', (e) => 
-    document.getElementById('title-error-message').classList[e.target?.value ? 'add' : 'remove' ]('hidden')
+    document.getElementById('title-error-message')
+      .classList[e.target?.value ? 'add' : 'remove' ]('hidden')
   );
   document.getElementById('author-input').addEventListener('blur', (e) => 
-    document.getElementById('author-error-message').classList[e.target?.value ? 'add' : 'remove' ]('hidden')
+    document.getElementById('author-error-message')
+      .classList[e.target?.value ? 'add' : 'remove' ]('hidden')
   );
   document.getElementById('pages-input').addEventListener('blur', (e) => {
     const pages = +e.target?.value;
@@ -75,7 +77,9 @@ function handleSubmit(e) {
     input[e].blur();
   })
 
-  const anyErrors = document.getElementById('add-book-form').querySelectorAll('.hidden').length !== Object.keys(input).length;
+  const anyErrors =
+    document.getElementById('add-book-form')
+      .querySelectorAll('.hidden').length !== Object.keys(input).length;
 
   if (!anyErrors) {
     handleModal();
@@ -85,10 +89,12 @@ function handleSubmit(e) {
 }
 
 function handleScroll() {
+  const isScrollOnTop = window.scrollY === 0;
+  const isScrollOnBottom = window.scrollY === document.body.scrollHeight - window.innerHeight;
   document.querySelector('header')
-    .classList[window.scrollY ? 'add' : 'remove']('drop-shadow');
+    .classList[isScrollOnTop ? 'remove' : 'add']('drop-shadow');
   document.querySelector('footer')
-    .classList[window.scrollY !== document.body.scrollHeight - window.innerHeight ? 'add' : 'remove']('drop-shadow');
+    .classList[isScrollOnBottom ? 'remove' : 'add']('drop-shadow');
 }
 
 function toogleTheme() {
