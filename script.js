@@ -9,7 +9,7 @@ function main() {
   }
 
   (new ResizeObserver(handleScroll)).observe(document.body);
-  window.addEventListener('wheel', handleScroll, { capture: true, passive: true });
+  window.addEventListener('wheel', throttle(handleScroll, 500), { capture: true, passive: true });
   window.addEventListener('resize', handleScroll);
   document.getElementById('change-theme').addEventListener('click', toogleTheme);
 
@@ -102,6 +102,18 @@ function toogleTheme() {
   button.classList.toggle('ph-moon-bold');
   button.classList.toggle('ph-sun-bold');
   document.documentElement.classList.toggle('dark');
+}
+
+function throttle(callback, delay) {
+  let wait = false;
+
+  return function() {
+    if (wait) return;
+
+    callback();
+    wait = true;
+    setTimeout(() => wait = false, delay)
+  }
 }
 
 window.addEventListener('DOMContentLoaded', main);
