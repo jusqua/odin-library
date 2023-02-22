@@ -9,7 +9,7 @@ function main() {
   }
 
   (new ResizeObserver(handleScroll)).observe(document.body);
-  window.addEventListener('scroll', handleScroll);
+  window.addEventListener('wheel', handleScroll, { capture: true, passive: true });
   window.addEventListener('resize', handleScroll);
   document.getElementById('change-theme').addEventListener('click', toogleTheme);
 
