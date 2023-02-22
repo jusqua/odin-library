@@ -1,12 +1,6 @@
 function main() {
-  const bookshelf = document.getElementById('bookshelf');
-  const books = [];
-
-  for (let i = 0; i < 9; i++) {
-    const book = document.createElement('button');
-    book.className = 'bg-zinc-400 dark:bg-zinc-700 drop-shadow hover:drop-shadow-2xl h-48 rounded-xl transition-[drop-shadow] duration-350';
-    bookshelf.appendChild(book);
-  }
+  Object.keys(localStorage)
+    .forEach(e => addBookToLibrary(JSON.parse(localStorage.getItem(e))));
 
   (new ResizeObserver(handleScroll)).observe(document.body);
   window.addEventListener('wheel', throttle(handleScroll, 500), { capture: true, passive: true });
@@ -64,6 +58,8 @@ function handleModal() {
 }
 
 function handleSubmit(e) {
+  e?.preventDefault();
+
   const input = {
     title: document.getElementById('title-input'),
     author: document.getElementById('author-input'),
@@ -81,11 +77,16 @@ function handleSubmit(e) {
     document.getElementById('add-book-form')
       .querySelectorAll('.hidden').length !== Object.keys(input).length;
 
-  if (!anyErrors) {
-    handleModal();
-  }
+  if (anyErrors) return;
 
-  e?.preventDefault();
+  addBookToLibrary(createBook(
+    input.title.value,
+    input.author.value,
+    +input.pages.value,
+    +input.pagesRead.value
+  ));
+
+  handleModal();
 }
 
 function handleScroll() {
@@ -114,6 +115,53 @@ function throttle(callback, delay) {
     wait = true;
     setTimeout(() => wait = false, delay)
   }
+}
+
+function addBookToLibrary(book) {
+  const element = document.createElement('button');
+  element.className = 'bg-zinc-400 dark:bg-zinc-700 drop-shadow hover:drop-shadow-2xl h-48 rounded-xl transition-[drop-shadow] duration-350';
+
+  const title = document.createElement('h2');
+  title.className = 'text-xl'
+  title.innerText = book.title;
+
+  const author = document.createElement('h3');
+  author.className = 'text-lg'
+  author.innerText = book.author;
+
+  const pagesDescription = document.createElement('p');
+  pagesDescription.innerText = book.alreadyRead
+    ? 'Already read'
+    : `${book.pagesRead} of ${book.pages} read`;
+
+  element.appendChild(title);
+  element.appendChild(author);
+  element.appendChild(pagesDescription);
+
+  localStorage.setItem(book.title, JSON.stringify(book));
+  document.getElementById('bookshelf').appendChild(element);
+}
+
+function createBook(title, author, pages, pagesRead = 0) {
+  return {
+    title,
+    author,
+    pages,
+    _pagesRead: pagesRead,
+    set pagesRead(value) {
+      this._pagesRead = clamp(0, this._pagesRead + value, this.pages);
+    },
+    get pagesRead() {
+      return this._pagesRead;
+    },
+    get alreadyRead() {
+      return this.pages === this._pagesRead;
+    }
+  };
+}
+
+function clamp(min, mid, max) {
+  return Math.max(min, Math.min(mid, max));
 }
 
 window.addEventListener('DOMContentLoaded', main);
