@@ -1,22 +1,31 @@
 function main() {
   Object.keys(localStorage)
-    .forEach(e => addBookToLibrary(JSON.parse(localStorage.getItem(e))));
+    .forEach(e => e.search(/^book\-\[.+\]$/) !== -1 && addBookToLibrary(JSON.parse(localStorage.getItem(e))));
 
   (new ResizeObserver(handleScroll)).observe(document.body);
   window.addEventListener('wheel', throttle(handleScroll, 500), { capture: true, passive: true });
   window.addEventListener('resize', handleScroll);
   document.getElementById('change-theme').addEventListener('click', toogleTheme);
 
-  document.getElementById('add-book').addEventListener('click', handleModal);
+  document.getElementById('add-book').addEventListener('click', () => handleModal());
   document.getElementById('add-book-modal-close').addEventListener('click', handleModal);
   document.getElementById('add-book-modal-overlay').addEventListener('click', handleModal);
 
   document.getElementById('add-book-modal-submit').addEventListener('click', handleSubmit);
 
-  document.getElementById('title-input').addEventListener('blur', (e) => 
-    document.getElementById('title-error-message')
-      .classList[e.target?.value ? 'add' : 'remove' ]('hidden')
-  );
+  document.getElementById('title-input').addEventListener('blur', (e) => {
+    const alreadyExist = Object.keys(localStorage).includes(`book-[${e.target?.value}]`);
+    const updatingBook = document.getElementById('add-book-form').getAttribute('update');
+    const errorMessage = document.getElementById('title-error-message');
+
+    if (alreadyExist && updatingBook !== e.target?.value) {
+      errorMessage.classList.remove('hidden');
+      errorMessage.innerText = 'This book already in your shelf';
+    } else {
+      errorMessage.classList[e.target?.value ? 'add' : 'remove']('hidden')
+      errorMessage.innerText = 'This field is required';
+    }
+  });
   document.getElementById('author-input').addEventListener('blur', (e) => 
     document.getElementById('author-error-message')
       .classList[e.target?.value ? 'add' : 'remove' ]('hidden')
@@ -40,26 +49,30 @@ function main() {
     toogleTheme();
 }
 
-function handleModal() {
+function handleModal(book) {
   document.getElementById('add-book-modal').classList.toggle('invisible');
   document.body.classList.toggle('overflow-hidden');
+  document.getElementById('add-book-form').setAttribute('update', book?.title);
 
   if (document.body.classList.contains('overflow-hidden')) {
-    document.getElementById('title-input').value = "";
+    document.getElementById('title-input').value = book?.title || '';;
     document.getElementById('title-error-message').classList.add('hidden');
-    document.getElementById('author-input').value = "";
+    document.getElementById('author-input').value = book?.author || '';
     document.getElementById('author-error-message').classList.add('hidden');
-    document.getElementById('pages-input').value = "";
+    document.getElementById('pages-input').value = String(book?.pages) || '';
     document.getElementById('pages-error-message').classList.add('hidden');
-    document.getElementById('pages-read-input').value = "";
+    document.getElementById('pages-read-input').value = String(book?.pagesRead) || '';
     document.getElementById('pages-read-error-message').classList.add('hidden');
     document.getElementById('title-input').focus();
+    document.getElementById('add-book-modal-submit').innerText = book !== undefined ? 'Update book' : 'Add new book';
   }
 }
 
 function handleSubmit(e) {
   e?.preventDefault();
 
+  const bookshelf = document.getElementById('bookshelf');
+  const form = document.getElementById('add-book-form');
   const input = {
     title: document.getElementById('title-input'),
     author: document.getElementById('author-input'),
@@ -73,11 +86,17 @@ function handleSubmit(e) {
     input[e].blur();
   })
 
-  const anyErrors =
-    document.getElementById('add-book-form')
-      .querySelectorAll('.hidden').length !== Object.keys(input).length;
+  const anyErrors = form.querySelectorAll('.hidden').length !== Object.keys(input).length;
 
   if (anyErrors) return;
+
+  const updatingBook = form.getAttribute('update');
+
+  if (updatingBook !== undefined) {
+    const [book] = [...bookshelf.querySelectorAll('button')]
+      .filter((e) => e.querySelector('h2').innerText === updatingBook);
+    bookshelf.removeChild(book);
+  }
 
   addBookToLibrary(createBook(
     input.title.value,
@@ -119,26 +138,32 @@ function throttle(callback, delay) {
 
 function addBookToLibrary(book) {
   const element = document.createElement('button');
-  element.className = 'bg-zinc-400 dark:bg-zinc-700 drop-shadow hover:drop-shadow-2xl h-48 rounded-xl transition-[drop-shadow] duration-350';
+  element.className = 'flex flex-col items-start justify-center bg-zinc-400 dark:bg-zinc-700 drop-shadow hover:drop-shadow-2xl h-48 rounded-xl transition-[drop-shadow] duration-350 p-4 gap-4';
 
   const title = document.createElement('h2');
-  title.className = 'text-xl'
+  title.className = 'ph-book-open-fill before:pr-2 text-3xl flex items-center justify-center pointer-events-none';
   title.innerText = book.title;
 
   const author = document.createElement('h3');
-  author.className = 'text-lg'
+  author.className = 'ph-person-fill before:pr-2 text-2xl flex items-center justify-center pointer-events-none';
   author.innerText = book.author;
 
   const pagesDescription = document.createElement('p');
-  pagesDescription.innerText = book.alreadyRead
-    ? 'Already read'
-    : `${book.pagesRead} of ${book.pages} read`;
+  pagesDescription.className = 'before:pr-2 text-xl flex items-center justify-center pointer-events-none';
+  pagesDescription.classList.add(book.alreadyRead ? 'ph-check-bold' : 'ph-files-fill');
+  pagesDescription.innerText = `${book.pagesRead} of ${book.pages} read`;
 
   element.appendChild(title);
   element.appendChild(author);
   element.appendChild(pagesDescription);
+  element.addEventListener('click', (e) => {
+    const title = e.target?.querySelector('h2').innerText;
+    const author = e.target?.querySelector('h3').innerText;
+    const [pagesRead, pages] = e.target?.querySelector('p').innerText.match(/\d+/g);
+    handleModal(createBook(title, author, pages, pagesRead));
+  });
 
-  localStorage.setItem(book.title, JSON.stringify(book));
+  localStorage.setItem(`book-[${book.title}]`, JSON.stringify(book));
   document.getElementById('bookshelf').appendChild(element);
 }
 
