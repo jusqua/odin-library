@@ -12,6 +12,17 @@ function main() {
   document.getElementById('add-book-modal-overlay').addEventListener('click', handleModal);
 
   document.getElementById('add-book-modal-submit').addEventListener('click', handleSubmit);
+  document.getElementById('add-book-modal-delete').addEventListener('click', () => {
+    const bookshelf = document.getElementById('bookshelf');
+    const updatingBook = document.getElementById('add-book-form').getAttribute('update');
+    if (updatingBook !== undefined) {
+      const [book] = [...bookshelf.querySelectorAll('button')]
+        .filter((e) => e.querySelector('h2').innerText === updatingBook);
+      bookshelf.removeChild(book);
+      localStorage.removeItem(`book-[${updatingBook}]`);
+    }
+    handleModal();
+  });
 
   document.getElementById('title-input').addEventListener('blur', (e) => {
     const alreadyExist = Object.keys(localStorage).includes(`book-[${e.target?.value}]`);
@@ -65,6 +76,7 @@ function handleModal(book) {
     document.getElementById('pages-read-error-message').classList.add('hidden');
     document.getElementById('title-input').focus();
     document.getElementById('add-book-modal-submit').innerText = book !== undefined ? 'Update book' : 'Add new book';
+    document.getElementById('add-book-modal-delete').classList[book === undefined ? 'add' : 'remove']('invisible');
   }
 }
 
@@ -96,6 +108,7 @@ function handleSubmit(e) {
     const [book] = [...bookshelf.querySelectorAll('button')]
       .filter((e) => e.querySelector('h2').innerText === updatingBook);
     bookshelf.removeChild(book);
+    localStorage.removeItem(`book-[${updatingBook}]`);
   }
 
   addBookToLibrary(createBook(
