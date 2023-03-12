@@ -15,7 +15,7 @@ function main() {
   document.getElementById('add-book-modal-delete').addEventListener('click', () => {
     const bookshelf = document.getElementById('bookshelf');
     const updatingBook = document.getElementById('add-book-form').getAttribute('update');
-    if (updatingBook !== undefined) {
+    if (updatingBook !== 'undefined') {
       const [book] = [...bookshelf.querySelectorAll('button')]
         .filter((e) => e.querySelector('h2').innerText === updatingBook);
       bookshelf.removeChild(book);
@@ -104,7 +104,7 @@ function handleSubmit(e) {
 
   const updatingBook = form.getAttribute('update');
 
-  if (updatingBook !== undefined) {
+  if (updatingBook !== 'undefined') {
     const [book] = [...bookshelf.querySelectorAll('button')]
       .filter((e) => e.querySelector('h2').innerText === updatingBook);
     bookshelf.removeChild(book);
